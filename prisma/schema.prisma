@@ -1,0 +1,106 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  phonenumber String  @db.Char(20) @unique
+  hash        String
+
+  firstName String?
+  lastName  String?
+
+  employees  Employee[]  @relation(name: "employee")
+  hiraTypes  HiraType[]  @relation(name: "hiraType")
+  pagar  Pagar[]  @relation(name: "pagar")
+  upad  Upad[]  @relation(name: "upad")
+
+  @@map("users")
+}
+
+model Employee {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  name        String @db.Char(255)
+  firstName   String @db.Char(255)
+  lastName    String @db.Char(255)
+  phonenumber String @db.Char(20)
+  typeId      Int
+
+  type HiraType @relation(name: "hiraType", fields: [typeId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  pagar Pagar[] @relation("employee_pagar")
+  upad  Upad[] @relation("employee_upad")
+
+  userId Int
+  user   User @relation(name: "employee", fields: [userId], references: [id])
+
+  @@map("employees")
+}
+
+model HiraType {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  name String @db.Char(255)
+  bhav Float
+
+  hiraType Employee[] @relation("hiraType")
+
+  userId Int
+  user   User @relation(name: "hiraType", fields: [userId], references: [id])
+
+  @@map("hiraTypes")
+
+}
+
+model Pagar {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  date  DateTime
+  hira  Int
+  total Float
+  employeeId Int
+
+  employee   Employee @relation(name: "employee_pagar", fields: [employeeId], references: [id])
+
+  userId Int
+  user   User @relation(name: "pagar", fields: [userId], references: [id])
+
+  @@map("pagars")
+
+}
+
+model Upad {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  date DateTime
+  upad Int
+  employeeId Int
+
+  employee   Employee @relation(name:"employee_upad", fields: [employeeId], references: [id])
+
+  userId Int
+  user   User @relation(name: "upad", fields: [userId], references: [id])
+
+  @@map("upads")
+
+}
