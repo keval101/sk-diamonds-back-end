@@ -45,4 +45,15 @@ export class UpadService {
         })
         return data;
     }
+
+    
+    async deleteUpad(userId: number, upadId: number) {
+        const data = await this.prisma.upad.delete({
+            where: {
+                id: upadId
+            },
+        })
+
+        return data;
+    }
 }

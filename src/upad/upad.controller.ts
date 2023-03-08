@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post, Put, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { User } from 'src/decorators/user.decorator';
 import { PagarService } from 'src/pagar/pagar.service';
@@ -24,5 +24,11 @@ export class UpadController {
     @Put('update')
     updateUpad(@User() userId: number, @Body() dto: UpdateUpadDto) {
         return this.upadService.updateUpad(userId, dto);
+    }
+
+    
+    @Delete('delete/:id')
+    deleteHiraTypes(@User() userId: number, @Param('id') upadId: number){
+        return this.upadService.deleteUpad(userId, Number(upadId));
     }
 }

@@ -47,4 +47,14 @@ export class PagarService {
         })
         return data;
     }
+
+    async deletePagar(userId: number, pagarId: number) {
+        const data = await this.prisma.pagar.delete({
+            where: {
+                id: pagarId
+            },
+        })
+
+        return data;
+    }
 }
