@@ -5,10 +5,11 @@ import { PrismaClient } from '@prisma/client';
 @Injectable()
 export class PrismaService extends PrismaClient {
   constructor(private config: ConfigService) {
+    console.log('-------------', config.get('DATABASE_URL'))
     super({
       datasources: {
         db: {
-          url: "mysql://u4cr2p24w2fml3ds:nQGZ02ySQax5ZwQhWEBl@brahw1q4pbv5daxolxl2-mysql.services.clever-cloud.com:3306/brahw1q4pbv5daxolxl2",
+          url: config.get('DATABASE_URL'),
         },
       },
     });

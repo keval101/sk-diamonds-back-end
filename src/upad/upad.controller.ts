@@ -1,7 +1,7 @@
 import { Body, Controller, Delete, Get, Param, Post, Put, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
-import { User } from 'src/decorators/user.decorator';
-import { PagarService } from 'src/pagar/pagar.service';
+import { User } from '../decorators/user.decorator';
+import { PagarService } from '../pagar/pagar.service';
 import { CreateUpadDto } from './dto/create.upad.dto';
 import { UpdateUpadDto } from './dto/update.upad.dto';
 import { UpadService } from './upad.service';

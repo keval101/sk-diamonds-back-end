@@ -1,6 +1,6 @@
 import { Body, Controller, Get, Param, Post, Put, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
-import { User } from 'src/decorators/user.decorator';
+import { User } from '../decorators/user.decorator';
 import { CreateEmployersDto } from './dto/create.employers.dto';
 import { UpdateEmployersDto } from './dto/update.employers.dto';
 import { EmployersService } from './employers.service';

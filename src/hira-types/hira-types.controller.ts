@@ -1,6 +1,6 @@
 import { Body, Controller, Delete, Get, Param, Post, Put, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
-import { User } from 'src/decorators/user.decorator';
+import { User } from '../decorators/user.decorator';
 import { CreateHiraTypeDto } from './dto/create.hiratype.dto';
 import { UpdateHiraTypeDto } from './dto/update.hiratype.dto';
 import { HiraTypesService } from './hira-types.service';
