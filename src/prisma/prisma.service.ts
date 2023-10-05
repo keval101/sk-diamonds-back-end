@@ -8,7 +8,7 @@ export class PrismaService extends PrismaClient {
     super({
       datasources: {
         db: {
-          url: config.get('DATABASE_URL'),
+          url: "mysql://u4cr2p24w2fml3ds:nQGZ02ySQax5ZwQhWEBl@brahw1q4pbv5daxolxl2-mysql.services.clever-cloud.com:3306/brahw1q4pbv5daxolxl2",
         },
       },
     });
