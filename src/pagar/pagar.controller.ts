@@ -10,16 +10,16 @@ import { PagarService } from './pagar.service';
 export class PagarController {
     constructor(private readonly pagarService: PagarService) {}
     
-    @Get('pagar/:id')
+    @Get(':id')
     getEmployer(@Param('id') id: string) {
         return this.pagarService.getEmployerPagar(Number(id));
     }
 
-    @Get('/total-hira')
-    getTotalHira(@User() userId: number) {
-        console.log(userId)
-        return this.pagarService.getTotalHira(userId);
-    }
+    // @Get('/total-hira')
+    // getTotalHira(@User() userId: number) {
+    //     console.log(userId)
+    //     return this.pagarService.getTotalHira(userId);
+    // }
 
     @Post('create')
     createPagar(@User() userId: number, @Body() dto: CreatePagarDto) {
