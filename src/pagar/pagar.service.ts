@@ -17,6 +17,40 @@ export class PagarService {
         return data;
     }
 
+    async getTotalHira(userId: number) {
+        const hira = await this.prisma.pagar.findMany({
+            where: {
+                userId: userId
+            }
+        })
+
+        const upad = await this.prisma.upad.findMany({
+            where: {
+                userId: userId
+            }
+        })
+
+        const pagar = await this.prisma.pagar.findMany({
+            where: {
+                userId: userId
+            }
+        })
+
+        const totalHira = hira.reduce((acc: any, obj: any) => {
+            console.log(acc, obj)
+            console.log('----')
+            return (acc + Number(obj.hira))
+        }, 0)
+
+        const totalUpad = upad.reduce((acc: any, obj: any) => {
+            console.log(acc, obj)
+            console.log('----')
+            return (acc + Number(obj.upad))
+        }, 0)
+
+        return {totalHira, totalUpad }
+    }
+
     async createPagar(userId: number, dto: CreatePagarDto) {
         const employeeId = dto.employeeId;
         const data = await this.prisma.pagar.create({

@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post, Put, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { User } from '../decorators/user.decorator';
 import { CreateEmployersDto } from './dto/create.employers.dto';
@@ -32,6 +32,11 @@ export class EmployersController {
     @Put('update')
     updateEmployer(@User() userId: number, @Body() dto: UpdateEmployersDto){
         return this.employersService.updateEmployer(userId, dto);
+    }
+
+    @Delete('delete/:id')
+    deleteEmployer(@Param('id') id: string){
+        return this.employersService.deleteEmployer(+id);
     }
     
 }

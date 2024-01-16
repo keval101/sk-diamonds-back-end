@@ -78,4 +78,14 @@ export class EmployersService {
         })
         return data;
     }
+
+    async deleteEmployer(employeeId: number) {
+        const data = await this.prisma.employee.delete({
+            where: {
+                id: employeeId
+            },
+        })
+
+        return data;
+    }
 }
